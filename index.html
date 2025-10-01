@@ -1,241 +1,243 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Desastre Mount Polley — 2014</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trabalho - Desastre Mina Mount Polley</title>
   <style>
-    :root{
-      --bg:#f4f7fb;
-      --card:#ffffff;
-      --text:#071122;
-      --accent:#0b72ef;
-      --muted:#55606a;
-      --glass: rgba(11,18,32,0.04);
+    /* ======= RESET ======= */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
-    [data-theme="dark"]{
-      --bg:#071122;
-      --card:#071827;
-      --text:#e6eef8;
-      --accent:#5fb0ff;
-      --muted:#9aa7bf;
-      --glass: rgba(255,255,255,0.03);
+    body {
+      font-family: Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      transition: background 0.3s, color 0.3s;
     }
-    *{box-sizing:border-box}
-    body{margin:0;font-family:Inter,system-ui,Segoe UI,Arial;background:var(--bg);color:var(--text);display:flex;min-height:100vh}
-    /* sidebar */
-    .sidebar{width:260px;padding:1rem;border-right:1px solid rgba(0,0,0,0.06);display:flex;flex-direction:column;gap:0.75rem;background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent)}
-    [data-theme="dark"] .sidebar{border-right-color:rgba(255,255,255,0.04)}
-    .brand{font-weight:800;font-size:1.1rem;color:var(--accent)}
-    nav{display:flex;flex-direction:column;gap:.4rem}
-    .nav-item{padding:.6rem;border-radius:8px;cursor:pointer;color:var(--text);display:flex;align-items:center;gap:.6rem}
-    .nav-item:hover{background:var(--glass)}
-    .meta-small{font-size:.95rem;color:var(--muted)}
-    /* main */
-    .main{flex:1;padding:1.2rem;display:flex;flex-direction:column;gap:1rem}
-    .topbar{display:flex;justify-content:space-between;align-items:center;gap:1rem}
-    .toggle{background:var(--card);border:1px solid rgba(0,0,0,0.06);padding:.45rem .8rem;border-radius:999px;display:flex;align-items:center;gap:.6rem;cursor:pointer}
-    [data-theme="dark"] .toggle{border-color:rgba(255,255,255,0.04)}
-    h1{font-size:1.2rem;margin:0}
-    /* content */
-    .content{background:var(--card);padding:1rem;border-radius:12px;min-height:120px;box-shadow:0 8px 20px rgba(11,18,32,0.04)}
-    [data-theme="dark"] .content{box-shadow:none}
-    .grid{display:grid;grid-template-columns:1fr;gap:1rem}
-    .card{padding:1rem;border-radius:10px;border:1px solid rgba(0,0,0,0.04);background:linear-gradient(180deg,transparent,rgba(255,255,255,0.01))}
-    .card h2{margin:0 0 .4rem 0}
-    p{margin:.45rem 0;color:var(--muted);line-height:1.4}
-    .two-col{display:grid;grid-template-columns:1fr 320px;gap:1rem}
-    .info-box{background:transparent;padding:.8rem;border-radius:8px;border:1px dashed rgba(0,0,0,0.06)}
-    .slides .slide{padding:.8rem;border-radius:8px;border-left:4px solid var(--accent);background:linear-gradient(90deg,transparent,rgba(0,0,0,0.01))}
-    footer{font-size:.85rem;color:var(--muted)}
-    .hidden{display:none}
-    .small{font-size:.95rem;color:var(--muted)}
-    /* responsive */
-    @media (max-width:900px){
-      .sidebar{display:none}
-      .two-col{grid-template-columns:1fr}
+    :root {
+      --bg: #ffffff;
+      --text: #000000;
+      --card-bg: #f2f2f2;
+      --menu-bg: #e4e4e4;
     }
-    /* simple print-friendly */
-    @media print{
-      body{background:white;color:black}
-      .sidebar, .toggle{display:none}
-      .content{box-shadow:none;border:1px solid #ddd}
+    .dark {
+      --bg: #121212;
+      --text: #ffffff;
+      --card-bg: #1e1e1e;
+      --menu-bg: #2a2a2a;
+    }
+
+    /* ======= HEADER ======= */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem;
+      background: var(--card-bg);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+    header h1 {
+      font-size: 1.2rem;
+    }
+    .btns {
+      display: flex;
+      gap: 10px;
+    }
+    button {
+      cursor: pointer;
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 5px;
+      background: var(--menu-bg);
+      color: var(--text);
+      font-size: 1rem;
+    }
+
+    /* ======= MENU LATERAL ======= */
+    #sidebar {
+      position: fixed;
+      top: 0;
+      left: -250px;
+      width: 250px;
+      height: 100%;
+      background: var(--menu-bg);
+      padding: 1rem;
+      transition: left 0.3s ease;
+      box-shadow: 2px 0 5px rgba(0,0,0,0.3);
+      z-index: 1000;
+    }
+    #sidebar.active {
+      left: 0;
+    }
+    #sidebar h2 {
+      margin-bottom: 1rem;
+    }
+    #sidebar ul {
+      list-style: none;
+    }
+    #sidebar ul li {
+      margin: 10px 0;
+    }
+    #sidebar ul li a {
+      text-decoration: none;
+      color: var(--text);
+    }
+
+    /* ======= CONTEÚDO ======= */
+    main {
+      padding: 1rem;
+    }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+    }
+    .card {
+      background: var(--card-bg);
+      padding: 1rem;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .card:hover {
+      transform: scale(1.05);
+    }
+
+    .section {
+      display: none;
+      margin-top: 1rem;
+    }
+    .section.active {
+      display: block;
     }
   </style>
 </head>
-<body data-theme="light">
-  <aside class="sidebar" aria-label="Menu lateral">
-    <div class="brand">Desastre: Mount Polley — 2014</div>
-    <div class="meta-small"><strong>Equipe:</strong> Kauan e Marcos Junior</div>
-    <nav id="menu">
-      <div class="nav-item" data-target="resumo">Resumo</div>
-      <div class="nav-item" data-target="local">Local</div>
-      <div class="nav-item" data-target="causas">Causas</div>
-      <div class="nav-item" data-target="impactos">Impactos</div>
-      <div class="nav-item" data-target="socioambientais">Impactos socioambientais</div>
-      <div class="nav-item" data-target="vidas">Mortes & vítimas</div>
-      <div class="nav-item" data-target="recuperacao">Recuperação e monitoramento</div>
-      <div class="nav-item" data-target="slides">Versão para slides</div>
-      <div class="nav-item" data-target="fontes">Fontes principais</div>
-    </nav>
-    <div style="margin-top:auto" class="small">Prof.: ____________</div>
-  </aside>
+<body>
+  <!-- MENU LATERAL -->
+  <nav id="sidebar">
+    <h2>Menu</h2>
+    <ul>
+      <li><a href="#" onclick="showSection('inicio')">Início</a></li>
+      <li><a href="#" onclick="showSection('local')">Local</a></li>
+      <li><a href="#" onclick="showSection('motivos')">Motivos</a></li>
+      <li><a href="#" onclick="showSection('impactos')">Impactos</a></li>
+      <li><a href="#" onclick="showSection('socioambientais')">Socioambientais</a></li>
+      <li><a href="#" onclick="showSection('mortes')">Mortes</a></li>
+      <li><a href="#" onclick="showSection('recuperacao')">Projetos de Recuperação</a></li>
+      <li><a href="#" onclick="showSection('indenizacao')">Indenizações</a></li>
+      <li><a href="#" onclick="showSection('empresa')">Empresa Responsável</a></li>
+      <li><a href="#" onclick="showSection('recupamb')">Recuperação Ambiental</a></li>
+      <li><a href="#" onclick="showSection('equipe')">Equipe</a></li>
+    </ul>
+  </nav>
 
-  <main class="main" role="main">
-    <div class="topbar">
-      <div>
-        <h1>Rompimento da barragem — Mount Polley (2014)</h1>
-        <div class="small">Um estudo detalhado do desastre de rejeitos em British Columbia</div>
-      </div>
-      <div style="display:flex;gap:.6rem;align-items:center">
-        <div class="toggle" id="themeToggle" title="Mudar tema" role="button" aria-pressed="false">
-          <span id="toggleEmoji">☀️</span>
-          <small id="toggleText">Modo claro</small>
-        </div>
-      </div>
+  <!-- CABEÇALHO -->
+  <header>
+    <h1>Desastre da Mina Mount Polley</h1>
+    <div class="btns">
+      <button onclick="toggleMenu()">☰</button>
+      <button id="theme-toggle">🌞</button>
     </div>
+  </header>
 
-    <!-- Resumo inicial / card -->
-    <section id="resumo" class="content">
-      <div class="card">
-        <h2>Resumo executivo</h2>
-        <p>Em 4 de agosto de 2014, a barragem de rejeitos da mina Mount Polley (Imperial Metals) em British Columbia falhou, liberando dezenas de milhões de metros cúbicos de água e sedimentos para Polley Lake, Hazeltine Creek e Quesnel Lake. O evento provocou grandes impactos ambientais e mobilizou resposta técnica, governamental e comunitária para remediação e monitoramento de longo prazo.</p>
-        <div class="small">Clique nos tópicos do menu para ver informações detalhadas.</div>
+  <!-- CONTEÚDO -->
+  <main>
+    <!-- INÍCIO COM CARDS -->
+    <section id="inicio" class="section active">
+      <h2>Início</h2>
+      <div class="cards">
+        <div class="card" onclick="showSection('local')">Local do Desastre</div>
+        <div class="card" onclick="showSection('motivos')">Motivos</div>
+        <div class="card" onclick="showSection('impactos')">Impactos</div>
+        <div class="card" onclick="showSection('socioambientais')">Impactos Socioambientais</div>
+        <div class="card" onclick="showSection('mortes')">Mortes</div>
+        <div class="card" onclick="showSection('recuperacao')">Projetos de Recuperação</div>
+        <div class="card" onclick="showSection('indenizacao')">Indenizações</div>
+        <div class="card" onclick="showSection('empresa')">Empresa Responsável</div>
+        <div class="card" onclick="showSection('recupamb')">Recuperação Ambiental</div>
+        <div class="card" onclick="showSection('equipe')">Equipe</div>
       </div>
     </section>
 
-    <!-- Detailed sections -->
-    <section id="local" class="content hidden">
-      <div class="two-col">
-        <div>
-          <h2>Local onde ocorreu</h2>
-          <p><strong>Região:</strong> Colúmbia Britânica (British Columbia), Canadá.</p>
-          <p><strong>Corpos d'água afetados:</strong> Polley Lake → Hazeltine Creek → Quesnel Lake. Comunidade próxima: Likely.</p>
-          <p class="small">O material deslocou-se pelo vale do Hazeltine Creek e foi depositado nas margens e fundos dos lagos afetados, alterando morfologia e habitats.</p>
-        </div>
-        <aside class="info-box">
-          <strong>Dados rápidos</strong>
-          <ul class="small">
-            <li>Data: 4 de agosto de 2014</li>
-            <li>Empresa: Imperial Metals</li>
-            <li>Área: bacia de Quesnel Lake</li>
-          </ul>
-        </aside>
-      </div>
+    <!-- SEÇÕES DETALHADAS -->
+    <section id="local" class="section">
+      <h2>Local</h2>
+      <p>O desastre ocorreu na Mina de Mount Polley, localizada na Colúmbia Britânica, Canadá, em 4 de agosto de 2014.</p>
     </section>
 
-    <section id="causas" class="content hidden">
-      <h2>Causas e fatores técnicos</h2>
-      <p>A investigação independente concluiu que a falha foi uma <em>foundation failure</em> — uma falha na fundação/perímetro do reservatório de rejeitos. Problemas de projeto/elevação e zonas de enchimento/rochas depositadas na fundação contribuíram para perda de contenção.</p>
-      <p class="small">A barreira foi elevada ao longo do tempo (atividade permitida), e o evento ocorreu próximo à sua elevação permitida; a perda foi súbita e sem aviso prático para as pessoas nas proximidades.</p>
+    <section id="motivos" class="section">
+      <h2>Motivos</h2>
+      <p>O rompimento da barragem de rejeitos ocorreu devido a falhas estruturais no projeto e na gestão da mina, que não suportaram a pressão acumulada.</p>
     </section>
 
-    <section id="impactos" class="content hidden">
-      <h2>Impactos imediatos</h2>
-      <p>Grandes volumes de água e sedimentos (ordem de dezenas de milhões de m³) deslocaram-se rapidamente, causando erosão extrema do canal do córrego, deposição de sedimento e turvação significativa dos lagos adjacentes.</p>
-      <p>Houve perda de habitat aquático, mortalidade de organismos e impactos na qualidade da água que exigiram monitoramento e ações de mitigação.</p>
+    <section id="impactos" class="section">
+      <h2>Impactos</h2>
+      <p>Cerca de 25 milhões de metros cúbicos de rejeitos foram despejados em lagos e rios próximos, causando poluição em grande escala.</p>
     </section>
 
-    <section id="socioambientais" class="content hidden">
-      <h2>Impactos socioambientais (detalhado)</h2>
-      <p><strong>Ambiental:</strong> deposição de sedimentos, alteração do bentos lacustre, risco de mobilização de metais e alteração da qualidade físico-química da água.</p>
-      <p><strong>Social/Comunitário:</strong> comunidades locais (incluindo povos indígenas) preocupadas com pesca, abastecimento e uso recreativo; questionamento sobre consulta e consentimento para operações e elevação de reservatórios.</p>
-      <p><strong>Economia local:</strong> efeitos no turismo e na pesca recreativa/comercial; custos de resposta e possíveis perdas de renda.</p>
+    <section id="socioambientais" class="section">
+      <h2>Impactos Socioambientais</h2>
+      <p>Peixes e ecossistemas aquáticos foram gravemente afetados; comunidades indígenas locais sofreram com a contaminação da água, afetando sua alimentação e modo de vida.</p>
     </section>
 
-    <section id="vidas" class="content hidden">
-      <h2>Mortes e vítimas</h2>
-      <p>Não houve registro de mortes humanas diretamente atribuídas ao rompimento. O impacto principal foi ambiental, econômico e comunitário, com efeitos psicológicos e de perda de meios de subsistência para residentes locais.</p>
+    <section id="mortes" class="section">
+      <h2>Mortes</h2>
+      <p>Felizmente, não houve mortes diretamente associadas ao desastre.</p>
     </section>
 
-    <section id="recuperacao" class="content hidden">
-      <h2>Recuperação, remediação e monitoramento</h2>
-      <p>Autoridades provinciais, painéis independentes e a empresa adotaram planos de resposta emergencial, limpeza e monitoramento. Trabalhos posteriores incluíram estudos de impacto, planos de remediação e monitoramento de qualidade da água por anos subsequentes.</p>
-      <p class="small">A recuperação completa de ecossistemas aquáticos pode levar décadas; algumas melhorias ocorreram, mas pesquisas continuam para avaliar efeitos a longo prazo.</p>
+    <section id="recuperacao" class="section">
+      <h2>Projetos de Recuperação</h2>
+      <p>A empresa iniciou medidas de contenção e monitoramento, mas o processo foi lento e alvo de críticas.</p>
     </section>
 
-    <section id="slides" class="content hidden">
-      <h2>Versão para slides (textos prontos)</h2>
-      <div class="slides">
-        <div class="slide">
-          <h3>Slide 1 — Título & dados rápidos</h3>
-          <ul>
-            <li>Rompimento da barragem de rejeitos — Mount Polley (4 ago 2014)</li>
-            <li>Local: Polley Lake / Hazeltine Creek → Quesnel Lake (British Columbia, Canadá)</li>
-            <li>Empresa: Imperial Metals</li>
-          </ul>
-        </div>
-        <div class="slide">
-          <h3>Slide 2 — Causa</h3>
-          <ul>
-            <li>Falha de fundação no reservatório (TSF).</li>
-            <li>Interação com zonas de enchimento/rochas na base — perda súbita de contenção.</li>
-          </ul>
-        </div>
-        <div class="slide">
-          <h3>Slide 3 — Impactos</h3>
-          <ul>
-            <li>~17 milhões m³ de água + ~8 milhões m³ de rejeitos/sedimentos liberados.</li>
-            <li>Grande depósito de sedimentos, erosão de canais, perda de habitat aquático.</li>
-          </ul>
-        </div>
-        <div class="slide">
-          <h3>Slide 4 — Socioambiental e recuperação</h3>
-          <ul>
-            <li>Sem mortes humanas registradas; impactos socioeconômicos locais.</li>
-            <li>Planos de remediação, monitoramento de longo prazo e investigação independente.</li>
-          </ul>
-        </div>
-      </div>
+    <section id="indenizacao" class="section">
+      <h2>Indenizações</h2>
+      <p>Houve compensações financeiras, mas muitas comunidades indígenas alegaram que os valores foram insuficientes.</p>
     </section>
 
-    <section id="fontes" class="content hidden">
-      <h2>Principais fontes (para citar)</h2>
-      <ol class="small">
-        <li>Governo da Colúmbia Britânica — página e relatórios sobre o incidente (BC gov). :contentReference[oaicite:14]{index=14}</li>
-        <li>Painel independente — "Report on Mount Polley Tailings Storage Facility Breach" (Independent Review Panel, jan 2015). :contentReference[oaicite:15]{index=15}</li>
-        <li>Quesnel River Research Centre (UNBC) — síntese de pesquisas e volumes liberados. :contentReference[oaicite:16]{index=16}</li>
-        <li>Relatórios técnicos, artigos científicos sobre impactos e recuperação (Byrne et al., estudos pós-2014). :contentReference[oaicite:17]{index=17}</li>
-      </ol>
+    <section id="empresa" class="section">
+      <h2>Empresa Responsável</h2>
+      <p>A empresa responsável pelo desastre foi a Imperial Metals Corporation.</p>
     </section>
 
-    <footer>Feito por Kauan e Marcos Junior — baseado em relatórios e estudos técnicos</footer>
+    <section id="recupamb" class="section">
+      <h2>Recuperação Ambiental</h2>
+      <p>Até hoje, parte da área afetada continua degradada, com recuperação parcial dos ecossistemas.</p>
+    </section>
+
+    <section id="equipe" class="section">
+      <h2>Equipe</h2>
+      <p>Trabalho desenvolvido por: <b>Kauan</b> e <b>Marcos Júnior</b>.</p>
+    </section>
   </main>
 
   <script>
-    // show only one section
-    function showSection(id){
-      document.querySelectorAll('main .content').forEach(s=>s.classList.add('hidden'));
-      const el = document.getElementById(id);
-      if(el) el.classList.remove('hidden');
-      // accessibility focus
-      el && el.setAttribute('tabindex','-1') && el.focus();
-      window.scrollTo({top:0,behavior:'smooth'});
+    // Alternar seções
+    function showSection(id) {
+      document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      toggleMenu(false);
     }
 
-    // menu clicks
-    document.querySelectorAll('.nav-item').forEach(it=>{
-      it.tabIndex = 0;
-      it.addEventListener('click', ()=> showSection(it.dataset.target));
-      it.addEventListener('keydown', (e)=>{ if(e.key==='Enter') showSection(it.dataset.target) });
+    // Toggle tema
+    const themeBtn = document.getElementById("theme-toggle");
+    themeBtn.addEventListener("click", () => {
+      document.body.classList.toggle("dark");
+      themeBtn.textContent = document.body.classList.contains("dark") ? "🌙" : "🌞";
     });
 
-    // theme toggle with emoji sync
-    const body = document.body;
-    const toggle = document.getElementById('themeToggle');
-    const emoji = document.getElementById('toggleEmoji');
-    const ttext = document.getElementById('toggleText');
-    toggle.addEventListener('click', ()=>{
-      const cur = body.getAttribute('data-theme') || 'light';
-      if(cur === 'light'){
-        body.setAttribute('data-theme','dark'); emoji.textContent='🌙'; ttext.textContent='Modo escuro'; toggle.setAttribute('aria-pressed','true');
+    // Toggle menu lateral
+    function toggleMenu(force) {
+      const sidebar = document.getElementById("sidebar");
+      if (force === false) {
+        sidebar.classList.remove("active");
       } else {
-        body.setAttribute('data-theme','light'); emoji.textContent='☀️'; ttext.textContent='Modo claro'; toggle.setAttribute('aria-pressed','false');
+        sidebar.classList.toggle("active");
       }
-    });
-
-    // on load: show resumo
-    showSection('resumo');
+    }
   </script>
 </body>
 </html>
