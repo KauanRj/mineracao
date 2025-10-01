@@ -1,243 +1,207 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Trabalho - Desastre Mina Mount Polley</title>
-  <style>
-    /* ======= RESET ======= */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    body {
-      font-family: Arial, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      transition: background 0.3s, color 0.3s;
-    }
-    :root {
-      --bg: #ffffff;
-      --text: #000000;
-      --card-bg: #f2f2f2;
-      --menu-bg: #e4e4e4;
-    }
-    .dark {
-      --bg: #121212;
-      --text: #ffffff;
-      --card-bg: #1e1e1e;
-      --menu-bg: #2a2a2a;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Desastre Mina Mount Polley</title>
+<style>
+  /* RESET */
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family: Arial, sans-serif; background: var(--bg); color: var(--text); transition:0.3s;}
+  :root{
+    --bg:#fff;
+    --text:#000;
+    --card-bg:#f2f2f2;
+    --menu-bg:#b87e3f; /* marrom mineração */
+    --menu-text:#fff;
+  }
+  .dark{
+    --bg:#121212;
+    --text:#fff;
+    --card-bg:#1e1e1e;
+    --menu-bg:#5a3d1a;
+    --menu-text:#fff;
+  }
 
-    /* ======= HEADER ======= */
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem;
-      background: var(--card-bg);
-      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    }
-    header h1 {
-      font-size: 1.2rem;
-    }
-    .btns {
-      display: flex;
-      gap: 10px;
-    }
-    button {
-      cursor: pointer;
-      padding: 0.5rem 1rem;
-      border: none;
-      border-radius: 5px;
-      background: var(--menu-bg);
-      color: var(--text);
-      font-size: 1rem;
-    }
+  /* HEADER */
+  header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:1rem;
+    background:var(--card-bg);
+    box-shadow:0 2px 5px rgba(0,0,0,0.2);
+  }
+  header h1{font-size:1.2rem;}
+  .btns{display:flex; gap:10px;}
+  button{
+    cursor:pointer;
+    padding:0.5rem 1rem;
+    border:none;
+    border-radius:5px;
+    background:var(--menu-bg);
+    color:var(--menu-text);
+    font-size:1rem;
+  }
 
-    /* ======= MENU LATERAL ======= */
-    #sidebar {
-      position: fixed;
-      top: 0;
-      left: -250px;
-      width: 250px;
-      height: 100%;
-      background: var(--menu-bg);
-      padding: 1rem;
-      transition: left 0.3s ease;
-      box-shadow: 2px 0 5px rgba(0,0,0,0.3);
-      z-index: 1000;
-    }
-    #sidebar.active {
-      left: 0;
-    }
-    #sidebar h2 {
-      margin-bottom: 1rem;
-    }
-    #sidebar ul {
-      list-style: none;
-    }
-    #sidebar ul li {
-      margin: 10px 0;
-    }
-    #sidebar ul li a {
-      text-decoration: none;
-      color: var(--text);
-    }
+  /* MENU LATERAL */
+  #sidebar{
+    position:fixed;
+    top:0;
+    left:-250px;
+    width:250px;
+    height:100%;
+    background:var(--menu-bg);
+    padding:1rem;
+    transition:left 0.3s;
+    box-shadow:2px 0 5px rgba(0,0,0,0.3);
+    z-index:1000;
+    color:var(--menu-text);
+  }
+  #sidebar.active{left:0;}
+  #sidebar h2{margin-bottom:1rem;}
+  #sidebar ul{list-style:none;}
+  #sidebar ul li{
+    margin:10px 0;
+    padding:0.5rem 0;
+    border-bottom:1px solid rgba(255,255,255,0.3);
+  }
+  #sidebar ul li a{text-decoration:none; color:var(--menu-text); display:block;}
 
-    /* ======= CONTEÚDO ======= */
-    main {
-      padding: 1rem;
-    }
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1rem;
-    }
-    .card {
-      background: var(--card-bg);
-      padding: 1rem;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: transform 0.2s;
-    }
-    .card:hover {
-      transform: scale(1.05);
-    }
+  /* MAIN */
+  main{padding:1rem;}
+  .cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:1rem;
+  }
+  .card{
+    background:var(--card-bg);
+    padding:1rem;
+    border-radius:10px;
+    cursor:pointer;
+    transition: transform 0.2s;
+    border-left:5px solid #b87e3f;
+  }
+  .card:hover{transform:scale(1.05);}
+  .card p{margin-top:0.5rem; font-size:0.9rem; color:#555;}
 
-    .section {
-      display: none;
-      margin-top: 1rem;
-    }
-    .section.active {
-      display: block;
-    }
-  </style>
+  .section{display:none; margin-top:1rem;}
+  .section.active{display:block;}
+</style>
 </head>
 <body>
-  <!-- MENU LATERAL -->
-  <nav id="sidebar">
-    <h2>Menu</h2>
-    <ul>
-      <li><a href="#" onclick="showSection('inicio')">Início</a></li>
-      <li><a href="#" onclick="showSection('local')">Local</a></li>
-      <li><a href="#" onclick="showSection('motivos')">Motivos</a></li>
-      <li><a href="#" onclick="showSection('impactos')">Impactos</a></li>
-      <li><a href="#" onclick="showSection('socioambientais')">Socioambientais</a></li>
-      <li><a href="#" onclick="showSection('mortes')">Mortes</a></li>
-      <li><a href="#" onclick="showSection('recuperacao')">Projetos de Recuperação</a></li>
-      <li><a href="#" onclick="showSection('indenizacao')">Indenizações</a></li>
-      <li><a href="#" onclick="showSection('empresa')">Empresa Responsável</a></li>
-      <li><a href="#" onclick="showSection('recupamb')">Recuperação Ambiental</a></li>
-      <li><a href="#" onclick="showSection('equipe')">Equipe</a></li>
-    </ul>
-  </nav>
 
-  <!-- CABEÇALHO -->
-  <header>
-    <h1>Desastre da Mina Mount Polley</h1>
-    <div class="btns">
-      <button onclick="toggleMenu()">☰</button>
-      <button id="theme-toggle">🌞</button>
-    </div>
-  </header>
+<!-- MENU -->
+<nav id="sidebar">
+  <h2>Menu</h2>
+  <ul>
+    <li><a href="#" onclick="showSection('inicio')">Início</a></li>
+    <li><a href="#" onclick="showSection('local')">Local do Desastre</a></li>
+    <li><a href="#" onclick="showSection('motivos')">Motivos</a></li>
+    <li><a href="#" onclick="showSection('impactos')">Impactos</a></li>
+    <li><a href="#" onclick="showSection('socioambientais')">Impactos Socioambientais</a></li>
+    <li><a href="#" onclick="showSection('mortes')">Mortes</a></li>
+    <li><a href="#" onclick="showSection('recuperacao')">Projetos de Recuperação</a></li>
+    <li><a href="#" onclick="showSection('indenizacao')">Indenizações</a></li>
+    <li><a href="#" onclick="showSection('empresa')">Empresa Responsável</a></li>
+    <li><a href="#" onclick="showSection('recupamb')">Recuperação Ambiental</a></li>
+    <li><a href="#" onclick="showSection('equipe')">Equipe</a></li>
+  </ul>
+</nav>
 
-  <!-- CONTEÚDO -->
-  <main>
-    <!-- INÍCIO COM CARDS -->
-    <section id="inicio" class="section active">
-      <h2>Início</h2>
-      <div class="cards">
-        <div class="card" onclick="showSection('local')">Local do Desastre</div>
-        <div class="card" onclick="showSection('motivos')">Motivos</div>
-        <div class="card" onclick="showSection('impactos')">Impactos</div>
-        <div class="card" onclick="showSection('socioambientais')">Impactos Socioambientais</div>
-        <div class="card" onclick="showSection('mortes')">Mortes</div>
-        <div class="card" onclick="showSection('recuperacao')">Projetos de Recuperação</div>
-        <div class="card" onclick="showSection('indenizacao')">Indenizações</div>
-        <div class="card" onclick="showSection('empresa')">Empresa Responsável</div>
-        <div class="card" onclick="showSection('recupamb')">Recuperação Ambiental</div>
-        <div class="card" onclick="showSection('equipe')">Equipe</div>
+<!-- CABEÇALHO -->
+<header>
+  <h1>Desastre da Mina Mount Polley</h1>
+  <div class="btns">
+    <button onclick="toggleMenu()">☰</button>
+    <button id="theme-toggle">🌞</button>
+  </div>
+</header>
+
+<main>
+  <!-- INÍCIO COM CARDS -->
+  <section id="inicio" class="section active">
+    <h2>Início</h2>
+    <p style="margin-bottom:1rem;">
+    Este trabalho tem como objetivo apresentar o desastre da Mina Mount Polley (Canadá, 2014), detalhando os motivos, impactos, ações de recuperação e a responsabilidade da empresa envolvida. 
+    Você pode navegar pelos cards ou pelo menu lateral para explorar cada tópico.
+   </p>
+    <div class="cards">
+      <div class="card" onclick="showSection('local')">
+        Local do Desastre
+        <p>Colúmbia Britânica, Canadá. Polley Lake e Quesnel Lake foram os mais afetados.</p>
       </div>
-    </section>
+      <div class="card" onclick="showSection('motivos')">
+        Motivos
+        <p>Falhas estruturais na barragem de rejeitos, problemas de fundação e projeto.</p>
+      </div>
+      <div class="card" onclick="showSection('impactos')">
+        Impactos
+        <p>Liberação de ~25 milhões de m³ de rejeitos e água, alterando rios e lagos.</p>
+      </div>
+      <div class="card" onclick="showSection('socioambientais')">
+        Impactos Socioambientais
+        <p>Atingiu ecossistemas aquáticos e comunidades locais, impactando pesca e lazer.</p>
+      </div>
+      <div class="card" onclick="showSection('mortes')">
+        Mortes
+        <p>Não houve mortes diretas, mas houve perdas socioeconômicas.</p>
+      </div>
+      <div class="card" onclick="showSection('recuperacao')">
+        Projetos de Recuperação
+        <p>Medidas de contenção, monitoramento e planos de remediação foram implementados.</p>
+      </div>
+      <div class="card" onclick="showSection('indenizacao')">
+        Indenizações
+        <p>Compensações financeiras, mas comunidades consideraram insuficientes.</p>
+      </div>
+      <div class="card" onclick="showSection('empresa')">
+        Empresa Responsável
+        <p>Imperial Metals Corporation.</p>
+      </div>
+      <div class="card" onclick="showSection('recupamb')">
+        Recuperação Ambiental
+        <p>Área parcialmente recuperada, monitoramento continua.</p>
+      </div>
+      <div class="card" onclick="showSection('equipe')">
+        Equipe
+        <p>Trabalho desenvolvido por Kauan e Marcos Júnior.</p>
+      </div>
+    </div>
+  </section>
 
-    <!-- SEÇÕES DETALHADAS -->
-    <section id="local" class="section">
-      <h2>Local</h2>
-      <p>O desastre ocorreu na Mina de Mount Polley, localizada na Colúmbia Britânica, Canadá, em 4 de agosto de 2014.</p>
-    </section>
+  <!-- SEÇÕES DETALHADAS -->
+  <section id="local" class="section"><h2>Local do Desastre</h2><p>O desastre ocorreu na Mina de Mount Polley, Colúmbia Britânica, Canadá, em 4 de agosto de 2014.</p></section>
+  <section id="motivos" class="section"><h2>Motivos</h2><p>Falha na barragem de rejeitos devido a problemas de projeto e fundação.</p></section>
+  <section id="impactos" class="section"><h2>Impactos</h2><p>25 milhões de m³ de rejeitos liberados, causando erosão e poluição em rios e lagos.</p></section>
+  <section id="socioambientais" class="section"><h2>Impactos Socioambientais</h2><p>Peixes e ecossistemas aquáticos afetados; comunidades indígenas impactadas na pesca e abastecimento.</p></section>
+  <section id="mortes" class="section"><h2>Mortes</h2><p>Não houve mortes diretas.</p></section>
+  <section id="recuperacao" class="section"><h2>Projetos de Recuperação</h2><p>Medidas de contenção, monitoramento e remediação em andamento.</p></section>
+  <section id="indenizacao" class="section"><h2>Indenizações</h2><p>Compensações financeiras para as comunidades afetadas.</p></section>
+  <section id="empresa" class="section"><h2>Empresa Responsável</h2><p>Imperial Metals Corporation.</p></section>
+  <section id="recupamb" class="section"><h2>Recuperação Ambiental</h2><p>Recuperação parcial, monitoramento continua.</p></section>
+  <section id="equipe" class="section"><h2>Equipe</h2><p>Kauan e Marcos Júnior.</p></section>
+</main>
 
-    <section id="motivos" class="section">
-      <h2>Motivos</h2>
-      <p>O rompimento da barragem de rejeitos ocorreu devido a falhas estruturais no projeto e na gestão da mina, que não suportaram a pressão acumulada.</p>
-    </section>
+<script>
+  function showSection(id){
+    document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    toggleMenu(false);
+  }
 
-    <section id="impactos" class="section">
-      <h2>Impactos</h2>
-      <p>Cerca de 25 milhões de metros cúbicos de rejeitos foram despejados em lagos e rios próximos, causando poluição em grande escala.</p>
-    </section>
+  const themeBtn=document.getElementById("theme-toggle");
+  themeBtn.addEventListener("click",()=>{
+    document.body.classList.toggle("dark");
+    themeBtn.textContent=document.body.classList.contains("dark")?"🌙":"🌞";
+  });
 
-    <section id="socioambientais" class="section">
-      <h2>Impactos Socioambientais</h2>
-      <p>Peixes e ecossistemas aquáticos foram gravemente afetados; comunidades indígenas locais sofreram com a contaminação da água, afetando sua alimentação e modo de vida.</p>
-    </section>
-
-    <section id="mortes" class="section">
-      <h2>Mortes</h2>
-      <p>Felizmente, não houve mortes diretamente associadas ao desastre.</p>
-    </section>
-
-    <section id="recuperacao" class="section">
-      <h2>Projetos de Recuperação</h2>
-      <p>A empresa iniciou medidas de contenção e monitoramento, mas o processo foi lento e alvo de críticas.</p>
-    </section>
-
-    <section id="indenizacao" class="section">
-      <h2>Indenizações</h2>
-      <p>Houve compensações financeiras, mas muitas comunidades indígenas alegaram que os valores foram insuficientes.</p>
-    </section>
-
-    <section id="empresa" class="section">
-      <h2>Empresa Responsável</h2>
-      <p>A empresa responsável pelo desastre foi a Imperial Metals Corporation.</p>
-    </section>
-
-    <section id="recupamb" class="section">
-      <h2>Recuperação Ambiental</h2>
-      <p>Até hoje, parte da área afetada continua degradada, com recuperação parcial dos ecossistemas.</p>
-    </section>
-
-    <section id="equipe" class="section">
-      <h2>Equipe</h2>
-      <p>Trabalho desenvolvido por: <b>Kauan</b> e <b>Marcos Júnior</b>.</p>
-    </section>
-  </main>
-
-  <script>
-    // Alternar seções
-    function showSection(id) {
-      document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
-      document.getElementById(id).classList.add('active');
-      toggleMenu(false);
-    }
-
-    // Toggle tema
-    const themeBtn = document.getElementById("theme-toggle");
-    themeBtn.addEventListener("click", () => {
-      document.body.classList.toggle("dark");
-      themeBtn.textContent = document.body.classList.contains("dark") ? "🌙" : "🌞";
-    });
-
-    // Toggle menu lateral
-    function toggleMenu(force) {
-      const sidebar = document.getElementById("sidebar");
-      if (force === false) {
-        sidebar.classList.remove("active");
-      } else {
-        sidebar.classList.toggle("active");
-      }
-    }
-  </script>
+  function toggleMenu(force){
+    const sidebar=document.getElementById("sidebar");
+    if(force===false){sidebar.classList.remove("active");}
+    else{sidebar.classList.toggle("active");}
+  }
+</script>
 </body>
 </html>
