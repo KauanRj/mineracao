@@ -151,6 +151,18 @@
 
   /* AUTORES */
   .autores{margin-bottom:1.5rem; font-weight:bold; font-size:1.05rem; color:var(--accent);}
+
+  /* Fundo interativo funcional */
+  .particle{
+    position:absolute;
+    border-radius:50%;
+    opacity:0.3;
+    animation: floatUp linear infinite;
+  }
+  @keyframes floatUp{
+    0%{transform:translateY(100vh);}
+    100%{transform:translateY(-20px);}
+  }
 </style>
 </head>
 <body>
@@ -210,7 +222,7 @@
     </div>
   </section>
 
-  <!-- SEÇÕES COMO CARDS -->
+  <!-- SEÇÕES COMO CARDS DETALHADOS -->
   <section id="local" class="section">
     <div class="section-card">
       <h2>Local do Desastre</h2>
@@ -235,7 +247,54 @@
     </div>
   </section>
 
-  <!-- Continue com as outras seções no mesmo formato -->
+  <section id="socioambientais" class="section">
+    <div class="section-card">
+      <h2>Impactos Socioambientais</h2>
+      <p>Comunidades locais e indígenas tiveram pesca prejudicada, abastecimento de água afetado, lazer e turismo comprometidos. Impacto ambiental duradouro na flora e fauna da região.</p>
+      <button class="next-btn" onclick="showSection('mortes')">Próximo: Mortes</button>
+    </div>
+  </section>
+
+  <section id="mortes" class="section">
+    <div class="section-card">
+      <h2>Mortes</h2>
+      <p>Não houve mortes diretas, mas perdas socioeconômicas significativas para as comunidades afetadas.</p>
+      <button class="next-btn" onclick="showSection('recuperacao')">Próximo: Projetos de Recuperação</button>
+    </div>
+  </section>
+
+  <section id="recuperacao" class="section">
+    <div class="section-card">
+      <h2>Projetos de Recuperação</h2>
+      <p>Implementação de medidas de contenção, monitoramento contínuo e planos de remediação do solo e da água. Estudos ambientais ainda estão em andamento.</p>
+      <button class="next-btn" onclick="showSection('indenizacao')">Próximo: Indenizações</button>
+    </div>
+  </section>
+
+  <section id="indenizacao" class="section">
+    <div class="section-card">
+      <h2>Indenizações</h2>
+      <p>Compensações financeiras foram pagas às comunidades afetadas, mas muitas consideraram insuficientes frente aos impactos socioeconômicos e ambientais.</p>
+      <button class="next-btn" onclick="showSection('empresa')">Próximo: Empresa Responsável</button>
+    </div>
+  </section>
+
+  <section id="empresa" class="section">
+    <div class="section-card">
+      <h2>Empresa Responsável</h2>
+      <p>Imperial Metals Corporation foi a responsável pela barragem que falhou, gerando impactos socioambientais e exigindo ações de recuperação.</p>
+      <button class="next-btn" onclick="showSection('recupamb')">Próximo: Recuperação Ambiental</button>
+    </div>
+  </section>
+
+  <section id="recupamb" class="section">
+    <div class="section-card">
+      <h2>Recuperação Ambiental</h2>
+      <p>Área parcialmente recuperada, monitoramento da fauna, flora e qualidade da água continua para avaliar a evolução do ecossistema.</p>
+      <button class="next-btn" onclick="showSection('inicio')">Voltar ao Início</button>
+    </div>
+  </section>
+
 </main>
 
 <script>
@@ -262,24 +321,15 @@
   const particleCount = 40;
   for(let i=0;i<particleCount;i++){
     const p = document.createElement('div');
-    p.style.position='absolute';
+    p.className='particle';
     p.style.width=p.style.height=`${Math.random()*10+5}px`;
     p.style.background='rgba(212,136,6,0.2)';
-    p.style.borderRadius='50%';
     p.style.left=`${Math.random()*100}vw`;
     p.style.top=`${Math.random()*100}vh`;
-    p.style.animation=`floatUp ${Math.random()*15+5}s linear infinite`;
-    p.style.zIndex='0';
+    p.style.animationDuration=`${Math.random()*15+5}s`;
     document.body.appendChild(p);
   }
 </script>
-
-<style>
-@keyframes floatUp{
-  0%{transform:translateY(100vh);}
-  100%{transform:translateY(-20px);}
-}
-</style>
 
 </body>
 </html>
